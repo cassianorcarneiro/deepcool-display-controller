@@ -21,6 +21,14 @@ User=deepcool
 # opening a display, which only matters if Qt is linked in at all. This
 # port doesn't depend on Qt, so there's no display backend to suppress.
 
+# PYTHONUNBUFFERED: without this, Python buffers stdout internally when it
+# isn't connected to a terminal (which is exactly systemd's case, capturing
+# into the journal) — output only appears once the buffer fills or the
+# process exits, not line-by-line. The original C++ version didn't have this
+# problem because it used Qt::endl, which flushes explicitly on every line;
+# this is the equivalent guarantee for the Python port.
+Environment=PYTHONUNBUFFERED=1
+
 # Logging
 StandardOutput=journal
 StandardError=journal
