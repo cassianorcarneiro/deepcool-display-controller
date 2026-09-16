@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/opt/deepcool-mystique-cli/venv/bin/python /opt/deepcool-mystique-cli/deepcool_cli.py --mode cpu --interval 1000
+ExecStart=/opt/deepcool-display-controller/venv/bin/python /opt/deepcool-display-controller/deepcool_cli.py --mode cpu --interval 1000
 Restart=on-failure
 RestartSec=5
 

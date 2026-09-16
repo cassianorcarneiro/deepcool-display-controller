@@ -100,8 +100,8 @@ substantially narrow down where a remaining bug could be).
 
 ```bash
 # Clone / copy the project
-sudo cp -r deepcool-mystique-cli/ /opt/deepcool-mystique-cli
-cd /opt/deepcool-mystique-cli
+sudo cp -r deepcool-display-controller/ /opt/deepcool-display-controller
+cd /opt/deepcool-display-controller
 
 # Create a virtual environment
 python3 -m venv venv && source venv/bin/activate
@@ -168,7 +168,7 @@ To change these for the systemd service, edit the `ExecStart` line in
 ## 📁 Project structure
 
 ```
-deepcool-mystique-cli/
+deepcool-display-controller/
 ├── deepcool_cli.py         # Entry point: CLI parsing, main loop
 ├── device.py                # USB device detection
 ├── protocol.py               # Packet format, checksum, display commands
