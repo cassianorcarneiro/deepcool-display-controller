@@ -1,0 +1,30 @@
+[Unit]
+Description=DeepCool Digital Controller
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/opt/deepcool-mystique-cli/venv/bin/python /opt/deepcool-mystique-cli/deepcool_cli.py --mode cpu --interval 1000
+Restart=on-failure
+RestartSec=5
+
+# Requires the udev rule in this repo (99-deepcool.rules) to be installed
+# first, and this user to be in the plugdev group it grants access to:
+#   sudo useradd -r -s /usr/sbin/nologin -G plugdev deepcool
+# The Qt version defaulted to root because it had no working non-root path
+# documented; the udev rule here already grants plugdev the access needed,
+# so root buys nothing extra and is one more thing that could go wrong if
+# this binary were ever compromised.
+User=deepcool
+
+# No QT_QPA_PLATFORM=offscreen here: that variable told Qt not to try
+# opening a display, which only matters if Qt is linked in at all. This
+# port doesn't depend on Qt, so there's no display backend to suppress.
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=deepcool-cli
+
+[Install]
+WantedBy=multi-user.target
